@@ -1,0 +1,11 @@
+const fs=require('node:fs');const vm=require('node:vm');const assert=require('node:assert/strict');
+const html=fs.readFileSync('index.html','utf8');
+assert.match(html,/<section class="grid" id="products">/);
+assert.match(html,/Vedoy Matcher/);
+for(const feature of ['Gavekalender','Gaveprofiler','Ønskelister','Gavepoeng','App-fordeler','Gavebestilling'])assert.ok(html.includes(feature),feature);
+const scripts=[...html.matchAll(/<script(?:\\s[^>]*)?>([\\s\\S]*?)<\\/script>/g)].map(m=>m[1]);
+assert.ok(scripts.length>=2,'Expected storefront and feature scripts');
+for(const script of scripts)new vm.Script(script);
+assert.match(html,/function recommend\\(/);
+assert.match(html,/function saveDemoOrder\\(/);
+console.log('PASS: HTML features and JavaScript syntax');

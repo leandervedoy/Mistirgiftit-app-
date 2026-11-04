@@ -1,0 +1,89 @@
+/* Mistir Gift – discoverable wishlists and restrained motion */
+:root{--rose:#b56e5a;--ink:#292520;--cream:#faf8f5;--focus:#ac6453}
+.top{gap:16px;flex-wrap:wrap}
+.quicknav{display:flex;align-items:center;gap:9px;margin-left:auto}
+.quicknav button{font:inherit;white-space:nowrap;cursor:pointer}
+.navlink{display:inline-flex;align-items:center;gap:8px;color:var(--ink);border:1px solid #e9ded3;background:#fff;border-radius:999px;padding:11px 15px;font-size:13px;font-weight:650;transition:background .2s,transform .2s,border-color .2s}
+.navlink:hover{background:#f9f3ef;border-color:#d3b7a9}
+.nav-icon{font-size:19px;line-height:1}
+.nav-count{display:inline-grid;place-items:center;min-width:23px;height:23px;padding:0 5px;border-radius:100px;background:#f4e4df;color:#874636;font-size:12px;font-variant-numeric:tabular-nums}
+.navcart{display:inline-flex;align-items:center;gap:9px;white-space:nowrap;box-shadow:0 5px 16px #2e242318}
+.navcart .nav-count{background:#ffffff30;color:white}
+.mobile-dock{display:none}
+.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.hero-actions .btn{margin:0}
+.hero-actions .btn.outline{background:#ffffffdc;border:1px solid #ead9cc}
+.wish-lede{font-size:14px;color:#6e625a;margin:4px 0 18px;line-height:1.5}
+.wish-overview{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0 20px}
+.wish-summary{border-radius:16px;border:1px solid #eee2d9;padding:14px;background:#fcf9f6;text-align:left;cursor:pointer}
+.wish-summary strong{display:block;font-size:20px;font-family:Georgia,serif}
+.wish-summary small{color:#6b625a;font-size:12px}
+.wish-section-title{font-size:16px;font-weight:700;margin:18px 0 10px}
+.wish-card{border-radius:17px;border:1px solid #e9ddd2;background:#fff;padding:16px;margin:10px 0;box-shadow:0 4px 15px #4b382009}
+.wish-card-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.wish-card h3{font-size:16px;margin:0 0 5px}
+.wish-card p{font-size:13px;color:#7e7066;margin:0}
+.wish-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px}
+.wish-actions button{font-size:12px!important;padding:8px 11px!important}
+.wish-row{display:flex;gap:12px;align-items:flex-start;border-bottom:1px solid #eee5df;padding:12px 0}
+.wish-row>img{width:72px;height:72px;flex:0 0 72px;object-fit:cover;border-radius:12px}
+.wish-row-main{flex:1;min-width:0}
+.wish-row-main strong{font-size:14px}
+.wish-row-main .note{margin:4px 0 8px}
+.wish-row-actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.wish-row-actions select{max-width:165px;min-width:110px;padding:8px;border-radius:11px;border:1px solid #ded3c8;font-size:12px}
+.wish-row-actions button{padding:7px 10px!important;font-size:12px!important}
+.wish-empty{padding:20px;border:1px dashed #d9c5b8;background:#fcf7f3;border-radius:16px;color:#736456;font-size:14px}
+.wish-empty .btn{margin-top:8px}
+.wish-create{border-radius:15px;padding:14px;background:#f6f1eb;margin:15px 0}
+.wish-create label{font-size:13px;margin:0 0 7px}
+.wish-create .rowline{display:flex;gap:8px}
+.wish-create .rowline input{min-width:0;flex:1}
+.wish-create .rowline button{white-space:nowrap}
+.wishback{border:0;background:none;padding:8px 0;color:#8c5444;font-weight:700;cursor:pointer}
+.heart{color:#71675f;transition:transform .2s,box-shadow .2s,color .2s}
+.heart[aria-pressed="true"]{color:#b34c70;background:#fff5f7}
+.heart:hover{transform:scale(1.12)}
+.heart:focus-visible{outline:3px solid var(--focus)}
+.modalback[style*="flex"]{animation:mistir-dim .22s ease both}
+.modal{box-shadow:0 28px 90px #251f1c40;animation:mistir-dialog .32s cubic-bezier(.2,.85,.28,1) both}
+#cartTrigger.cart-celebrate,#mobileCartTrigger.cart-celebrate{animation:cartCelebration .5s cubic-bezier(.2,.8,.2,1)}
+.fly-ghost{position:fixed;z-index:9999;pointer-events:none;object-fit:cover;border-radius:15px;box-shadow:0 12px 30px #47301f5c;will-change:transform,opacity}
+.fave-ghost{position:fixed;z-index:9999;pointer-events:none;color:#c4567b;font-size:28px;text-shadow:0 3px 12px #a53d5a52}
+.toast{box-shadow:0 12px 30px #28242133}
+@keyframes mistir-dim{from{opacity:0}to{opacity:1}}
+@keyframes mistir-dialog{from{opacity:0;transform:translateY(14px) scale(.975)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes cartCelebration{0%{transform:scale(1)}36%{transform:scale(1.1)}65%{transform:scale(.98)}100%{transform:scale(1)}}
+@media(hover:hover){.product{transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s}.product:hover{transform:translateY(-4px);box-shadow:0 12px 30px #412a1e21}.product:hover .photo img{transform:scale(1.055)}}
+@media(max-width:700px){
+ .navlink.finder-link{display:none}
+ .navlink{padding:10px 11px}
+ .quicknav{gap:6px}
+ .hero{padding:38px 25px}
+}
+@media(max-width:600px){
+ body{padding-bottom:76px}
+ footer{padding-bottom:38px}
+ .top{flex-wrap:nowrap;gap:7px;padding:12px}
+ .brand{font-size:21px;white-space:nowrap}
+ .quicknav{margin-left:auto}
+ .navlink.wishlist-link .nav-label{display:none}
+ .navlink.wishlist-link{border-radius:14px}
+ .navcart{padding:10px 11px}
+ .navcart .cart-label{display:none}
+ .navcart .cart-icon{font-size:18px}
+ .mobile-dock{display:grid;grid-template-columns:repeat(3,1fr);position:fixed;left:9px;right:9px;bottom:max(9px,env(safe-area-inset-bottom));z-index:8;background:#fffefcf6;backdrop-filter:blur(16px);border:1px solid #e6d9cf;box-shadow:0 14px 45px #27201e2b;border-radius:22px;padding:7px}
+ .mobile-dock button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:0;background:transparent;font:600 11px/1.2 system-ui,sans-serif;min-height:50px;position:relative;color:#51443e;cursor:pointer;border-radius:15px}
+ .mobile-dock button:hover,.mobile-dock button:focus-visible{background:#f7ede7}
+ .mobile-dock .dock-icon{font-size:20px}
+ .mobile-dock .dock-count{position:absolute;top:0;right:22%;background:#b56e5a;color:white;border-radius:15px;font-size:9px;min-width:16px;line-height:16px}
+ .toast{bottom:89px;width:max-content;max-width:calc(100% - 24px);text-align:center}
+ .modalback{padding:8px 8px 78px}
+ .modal{width:100%;padding:20px;max-height:calc(100dvh - 105px);border-radius:23px}
+ .wish-overview{gap:8px}
+ .wish-create .rowline{flex-direction:column}
+ .wish-create .rowline button{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}

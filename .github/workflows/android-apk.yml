@@ -1,0 +1,87 @@
+name: Build Mistir Gift Android Demo APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'android/**'
+      - 'index.html'
+      - 'mistir-ui.css'
+      - 'mistir-ui.js'
+      - 'android-download.html'
+      - '.github/workflows/android-apk.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  android-demo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify demo JavaScript
+        run: node tests/smoke.cjs
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android platform
+        run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: Bundle the existing store demo
+        run: |
+          mkdir -p android/app/src/main/assets
+          cp index.html mistir-ui.css mistir-ui.js android/app/src/main/assets/
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('android/app/src/main/assets/index.html')
+          html = path.read_text(encoding='utf-8')
+          html = html.replace('href="/mistir-ui.css"', 'href="mistir-ui.css"')
+          html = html.replace('src="/mistir-ui.js"', 'src="mistir-ui.js"')
+          html = html.replace("let u=new URL(location.href)", "let u=new URL('https://mistir-gift-demo-vedoy.vercel.app/')")
+          path.write_text(html, encoding='utf-8')
+          PY
+
+      - name: Compile APK without Android Studio
+        run: gradle --no-daemon -p android :app:assembleDebug
+
+      - name: Prepare named APK and checksum
+        run: |
+          cp android/app/build/outputs/apk/debug/app-debug.apk MistirGift-VedoyStudio-demo.apk
+          sha256sum MistirGift-VedoyStudio-demo.apk > MistirGift-VedoyStudio-demo.apk.sha256
+
+      - name: Upload installable APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: MistirGift-Android-Demo-APK
+          path: |
+            MistirGift-VedoyStudio-demo.apk
+            MistirGift-VedoyStudio-demo.apk.sha256
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Publish direct-download GitHub prerelease
+        if: github.ref == 'refs/heads/main'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if ! gh release view apk-demo-latest >/dev/null 2>&1; then
+            gh release create apk-demo-latest --title "Mistir Gift Android demo (Vedoy Studio)" --target main --prerelease --notes "Concept demo only. No live payments or orders. Built by GitHub Actions from the public source. Debug signed and intended for testing."
+          fi
+          gh release upload apk-demo-latest MistirGift-VedoyStudio-demo.apk MistirGift-VedoyStudio-demo.apk.sha256 --clobber

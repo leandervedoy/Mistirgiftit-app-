@@ -24,10 +24,36 @@
 <div class="brand"><div class="icon" aria-hidden="true">🎁</div><div><strong>Mistir Gift</strong><div class="eyebrow">Android-konsept fra Vedoy Studio</div></div></div>
 <h1>Installer gaveappen på Android</h1>
 <p>Test gavevelger, ønskelister, gavekalender, handlekurv og flere funksjoner i Vedoy Studios konseptdemo.</p>
-<a class="btn" href="https://github.com/leandervedoy/Mistirgiftit-app-/releases/download/apk-demo-latest/MistirGift-VedoyStudio-demo.apk">Last ned test-APK</a>
+<a class="btn" id="apkMainDownload" href="https://github.com/leandervedoy/Mistirgiftit-app-/actions/workflows/android-apk.yml">Se APK-status i GitHub</a>
+<p id="apkAvailability" role="status" aria-live="polite">Sjekker om APK-en er tilgjengelig …</p>
 <a class="secondary" href="https://github.com/leandervedoy/Mistirgiftit-app-/actions/workflows/android-apk.yml">Se bygg og alternative nedlastinger</a>
 <strong>Installering</strong>
 <ol><li>Last ned APK-filen fra GitHub.</li><li>Åpne den på Android-telefonen.</li><li>Hvis Android ber om det, tillat installasjon fra nettleseren for denne filen.</li><li>Åpne Mistir Gift Demo fra appoversikten.</li></ol>
 <div class="note"><strong>Demo, ikke ekte nettbutikk.</strong> Produkter og priser er eksempler. Ingen ekte betaling eller ordrebehandling. Last kun ned fra prosjektets offisielle GitHub. En nyere testversjon kan kreve at den forrige avinstalleres.</div>
 <footer>Utviklet av Vedoy Studio · En selvstendig konseptdemo</footer>
-</main></body></html>
+</main>
+<script>
+(function(){
+  var button=document.getElementById('apkMainDownload');
+  var message=document.getElementById('apkAvailability');
+  if(!button||!message||typeof fetch!=='function')return;
+  fetch('https://api.github.com/repos/leandervedoy/Mistirgiftit-app-/releases/tags/apk-demo-latest',{headers:{'Accept':'application/vnd.github+json'}})
+    .then(function(response){return response.ok?response.json():null;})
+    .then(function(release){
+      var assets=release&&Array.isArray(release.assets)?release.assets:[];
+      var apk=assets.find(function(asset){return asset.name==='MistirGift-VedoyStudio-demo.apk'&&asset.state==='uploaded';});
+      if(apk&&/^https:\/\/github\.com\//.test(apk.browser_download_url)){
+        button.href=apk.browser_download_url;
+        button.textContent='⬇ Last ned Mistir Gift Demo (.apk)';
+        message.textContent='APK-en er tilgjengelig via GitHub Releases. Installer kun fra en kilde du stoler på.';
+      }else{
+        button.textContent='Se APK-bygging i GitHub';
+        message.textContent='APK-en er foreløpig ikke publisert som nedlasting. Åpne GitHub Actions, velg en vellykket kjøring og last ned APK-artefakten.';
+      }
+    })
+    .catch(function(){
+      message.textContent='Kunne ikke hente APK-status nå. Du kan undersøke tilgjengelige bygg i GitHub Actions.';
+    });
+})();
+</script>
+</body></html>

@@ -18,43 +18,19 @@
     ol{padding-left:22px;line-height:1.8;color:#534b45}
     .btn:disabled{opacity:.6;cursor:not-allowed;background:#98897d}.note{background:#f7f2ed;border-radius:16px;padding:16px;margin-top:24px;font-size:14px}
     footer{color:#79716a;font-size:12px;margin-top:24px}a:focus-visible{outline:3px solid #1d4277;outline-offset:4px}
-  </style>
+  .download-buttons{display:grid;gap:10px;margin:22px 0}.download-buttons .btn{margin:0;border:0;font:700 15px/1.3 system-ui,sans-serif;cursor:pointer}.download-buttons .secondary-button{background:#f6ebe3;color:#79452f;border:1px solid #dbc2b2}.download-buttons .btn:disabled{opacity:.56;cursor:not-allowed;background:#98897d;color:white}.download-buttons .secondary-button:disabled{background:#e3dcd5;color:#685d55}#apkAvailability{font-size:14px}.secondary{margin:18px 0 22px}.btn:focus-visible{outline:3px solid #9a654c;outline-offset:3px}</style>
 </head>
 <body><main>
 <div class="brand"><div class="icon" aria-hidden="true">🎁</div><div><strong>Mistir Gift</strong><div class="eyebrow">Android-konsept fra Vedoy Studio</div></div></div>
 <h1>Installer gaveappen på Android</h1>
 <p>Test gavevelger, ønskelister, gavekalender, handlekurv og flere funksjoner i Vedoy Studios konseptdemo.</p>
-<button class="btn" id="apkMainDownload" type="button" disabled>Last ned Mistir Gift Demo (.apk)</button>
-<p id="apkAvailability" role="status" aria-live="polite">Sjekker om APK-en er tilgjengelig …</p>
+<div class="download-buttons"><button class="btn" id="zipMainDownload" type="button" disabled>📦 Last ned ZIP med APK</button><button class="btn secondary-button" id="apkMainDownload" type="button" disabled>⬇ Last ned APK direkte</button></div>
+<p id="apkAvailability" role="status" aria-live="polite">Sjekker om ZIP og APK er tilgjengelige …</p>
 <a class="secondary" href="/">← Tilbake til Mistir Gift</a>
-<strong>Installering</strong>
-<ol><li>Trykk «Last ned» her på siden når test-APK-en er tilgjengelig.</li><li>Åpne den på Android-telefonen.</li><li>Hvis Android ber om det, tillat installasjon fra nettleseren for denne filen.</li><li>Åpne Mistir Gift Demo fra appoversikten.</li></ol>
-<div class="note"><strong>Demo, ikke ekte nettbutikk.</strong> Produkter og priser er eksempler. Ingen ekte betaling eller ordrebehandling. Last kun ned fra en kilde du stoler på. En nyere testversjon kan kreve at den forrige avinstalleres.</div>
+<strong>Installering på Android</strong>
+<ol><li>Velg ZIP-pakke eller APK direkte fra denne siden.</li><li>Hvis du valgte ZIP: åpne nedlastinger, pakk ut ZIP-en, og trykk på APK-filen inni. Hvis du valgte APK direkte: åpne APK-filen.</li><li>Hvis Android ber om det, tillat installasjon fra nettleseren for denne filen.</li><li>Åpne Mistir Gift Demo fra appoversikten.</li></ol>
+<div class="note"><strong>Demo, ikke ekte nettbutikk.</strong> Produkter og priser er eksempler. Ingen ekte betaling eller ordrebehandling. Last kun ned fra denne demosiden eller Vedoy Studios offisielle GitHub-utgivelse. En nyere testversjon kan kreve at den forrige avinstalleres.</div>
 <footer>Utviklet av Vedoy Studio · En selvstendig konseptdemo</footer>
 </main>
-<script>
-(function(){
-  var button=document.getElementById('apkMainDownload');
-  var message=document.getElementById('apkAvailability');
-  if(!button||!message)return;
-  button.disabled=true;
-  button.addEventListener('click',function(){
-    if(!button.disabled)window.location.assign('/api/apk-download');
-  });
-  fetch('/api/apk-download?status=1',{cache:'no-store'})
-    .then(function(response){if(!response.ok)throw Error('status');return response.json();})
-    .then(function(data){
-      button.disabled=!data.available;
-      button.textContent=data.available?'⬇ Last ned Mistir Gift Demo (.apk)':'APK er ikke klar ennå';
-      message.textContent=data.available
-        ? 'APK-en kan lastes ned direkte her. Du trenger ikke GitHub eller Android Studio.'
-        : 'APK-filen er ikke ferdig bygget og publisert. Last ned-knappen aktiveres så snart filen finnes.';
-    })
-    .catch(function(){
-      button.disabled=true;
-      button.textContent='APK-status utilgjengelig';
-      message.textContent='Kunne ikke bekrefte nedlasting akkurat nå. Prøv igjen senere.';
-    });
-})();
-</script>
+<script src="/mistir-download.js" defer></script>
 </body></html>

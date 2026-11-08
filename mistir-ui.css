@@ -97,3 +97,21 @@
 /* Safe same-origin APK download: never send visitors to a GitHub page. */
 .app-download-cta:disabled,.hero .app-download-cta:disabled{opacity:.6;cursor:not-allowed;box-shadow:none;background:#98897d;border-color:#98897d;transform:none}
 .app-download-cta:not(:disabled){cursor:pointer}
+
+/* Refined storefront motion and Android downloads */
+.app-download-options{display:inline-flex;flex-wrap:wrap;gap:9px;align-items:center}
+.hero .app-download-options .btn{white-space:nowrap;letter-spacing:0.01em}
+.hero .app-download-cta.outline{background:#fffdfb;color:#81503d;border-color:#d7bba9;box-shadow:0 3px 13px #69432e16}
+.hero .app-download-cta.outline:not(:disabled):hover{background:#f8eae0;color:#74432f}
+.app-download-cta:disabled,.hero .app-download-cta:disabled,.hero .app-download-cta.outline:disabled{opacity:.56;cursor:not-allowed;box-shadow:none;transform:none;filter:grayscale(.2)}
+.app-download-options[hidden]{display:none!important}
+.anime-motion-enabled .hero,.anime-motion-enabled .product,.anime-motion-enabled .feature,.anime-motion-enabled .modal{animation:none!important}
+.anime-motion-enabled .product:not([data-motion-seen]),.anime-motion-enabled .feature:not([data-motion-seen]){opacity:0}
+.anime-motion-enabled .product[data-motion-seen],.anime-motion-enabled .feature[data-motion-seen]{will-change:auto}
+@media(max-width:590px){
+ .app-download-options{width:100%;display:grid;grid-template-columns:1fr}
+ .hero .app-download-options .btn{width:100%;min-height:46px}
+}
+@media(prefers-reduced-motion:reduce){
+ .anime-motion-enabled .product:not([data-motion-seen]),.anime-motion-enabled .feature:not([data-motion-seen]){opacity:1}
+}

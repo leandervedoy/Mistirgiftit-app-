@@ -32,3 +32,11 @@ Use a **stable, private signing key** stored in GitHub Actions secrets, create a
 The repository includes `android-download.html`; if deployed with the static site, it presents download/install instructions.
 
 `vedoystudio.mistirgift` alone is not a valid public DNS hostname. A possible subdomain is `mistirgift.vedoystudio.no`, provided Vedoy controls its DNS, or `vedoystudio.mistirgift.com` if the Mistir Gift domain owner authorizes it. Neither is created by this build.
+
+## ZIP installasjon og Anime.js
+
+APK-en og `MistirGift-VedoyStudio-demo.zip` publiseres samtidig. ZIP inneholder APK, SHA256-sjekksum og en installasjonsveiledning. Android kan ikke installere en ZIP direkte: pakk ut og apne APK-filen.
+
+Nettsiden har to knapper: **ZIP med APK** og **APK direkte**, begge via `/api/apk-download?format=zip|apk`. Knappene aktiveres bare for gyldige GitHub Release-filer. Endepunktet omdirigerer til GitHubs faktiske vedlegg (uten GitHub-side); store binarfiler proxieres ikke gjennom Vercel Function.
+
+Anime.js v4.5.0 er lagret lokalt i `vendor/` under MIT-lisens, og brukes av `mistir-motion.js` for behagelige overganger i nettsiden og offline i Android-demoen. Systeminnstillingen for redusert bevegelse respekteres. Kun demo, ikke kommersiell produksjonsapp.

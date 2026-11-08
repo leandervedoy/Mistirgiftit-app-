@@ -88,30 +88,13 @@
  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
 }
 
-/* Android APK download link – available on both desktop and mobile. */
-.hero .app-download-cta{display:inline-flex;align-items:center;justify-content:center;background:#ac5b45;color:#fff;text-decoration:none;border:1px solid #964f3e;box-shadow:0 5px 16px #5c33243a;min-height:44px}
-.hero .app-download-cta:hover,.hero .app-download-cta:focus-visible{background:#914631;color:#fff}
-.app-download-note{margin:11px 0 0!important;max-width:570px!important;font-size:13px!important;line-height:1.55;color:#6f594c!important}
-@media(max-width:460px){.hero .app-download-cta{width:100%}.hero-actions{align-items:stretch}}
 
-/* Safe same-origin APK download: never send visitors to a GitHub page. */
-.app-download-cta:disabled,.hero .app-download-cta:disabled{opacity:.6;cursor:not-allowed;box-shadow:none;background:#98897d;border-color:#98897d;transform:none}
-.app-download-cta:not(:disabled){cursor:pointer}
-
-/* Refined storefront motion and Android downloads */
-.app-download-options{display:inline-flex;flex-wrap:wrap;gap:9px;align-items:center}
-.hero .app-download-options .btn{white-space:nowrap;letter-spacing:0.01em}
-.hero .app-download-cta.outline{background:#fffdfb;color:#81503d;border-color:#d7bba9;box-shadow:0 3px 13px #69432e16}
-.hero .app-download-cta.outline:not(:disabled):hover{background:#f8eae0;color:#74432f}
-.app-download-cta:disabled,.hero .app-download-cta:disabled,.hero .app-download-cta.outline:disabled{opacity:.56;cursor:not-allowed;box-shadow:none;transform:none;filter:grayscale(.2)}
-.app-download-options[hidden]{display:none!important}
-.anime-motion-enabled .hero,.anime-motion-enabled .product,.anime-motion-enabled .feature,.anime-motion-enabled .modal{animation:none!important}
-.anime-motion-enabled .product:not([data-motion-seen]),.anime-motion-enabled .feature:not([data-motion-seen]){opacity:0}
-.anime-motion-enabled .product[data-motion-seen],.anime-motion-enabled .feature[data-motion-seen]{will-change:auto}
-@media(max-width:590px){
- .app-download-options{width:100%;display:grid;grid-template-columns:1fr}
- .hero .app-download-options .btn{width:100%;min-height:46px}
-}
-@media(prefers-reduced-motion:reduce){
- .anime-motion-enabled .product:not([data-motion-seen]),.anime-motion-enabled .feature:not([data-motion-seen]){opacity:1}
-}
+/* Separate wishlist screen navigation, including the Android gesture hint. */
+.swipe-hint{font-size:12px!important;color:#7a6254!important;line-height:1.5;margin:14px 0 0!important;letter-spacing:.01em}
+.swipe-hint span{font-size:18px;vertical-align:-2px}
+@media(hover:hover) and (pointer:fine){.swipe-hint{display:none}}
+.mobile-dock button:first-child{background:#f7ede7;color:#733f36}
+.mobile-dock button:focus-visible,.navlink:focus-visible{outline:3px solid #b56e5a;outline-offset:3px}
+html.mistir-page-leaving-left body{animation:mistir-leave-left .18s ease both}
+@keyframes mistir-leave-left{to{opacity:.7;transform:translateX(-19px)}}
+@media(prefers-reduced-motion:reduce){html.mistir-page-leaving-left body{animation:none}}

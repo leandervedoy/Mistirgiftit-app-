@@ -9,6 +9,12 @@ on:
       - 'index.html'
       - 'mistir-ui.css'
       - 'mistir-ui.js'
+      - 'mistir-catalog.js'
+      - 'mistir-swipe.js'
+      - 'mistir-wishlist.js'
+      - 'mistir-wishlist.css'
+      - 'wishlist.html'
+      - 'vd-base.css'
       - 'mistir-motion.js'
       - 'mistir-download.js'
       - 'vendor/**'
@@ -49,10 +55,16 @@ jobs:
       - name: Check animation module syntax
         run: node --check --input-type=module < mistir-motion.js
 
+      - name: Validate wishlist JavaScript syntax
+        run: |
+          node --check mistir-catalog.js
+          node --check mistir-wishlist.js
+          node --check mistir-swipe.js
+
       - name: Bundle the existing store demo
         run: |
           mkdir -p android/app/src/main/assets
-          cp index.html mistir-ui.css mistir-ui.js mistir-motion.js mistir-download.js android/app/src/main/assets/
+          cp index.html mistir-ui.css mistir-ui.js mistir-motion.js mistir-download.js mistir-catalog.js mistir-swipe.js mistir-wishlist.js mistir-wishlist.css wishlist.html vd-base.css android/app/src/main/assets/
           mkdir -p android/app/src/main/assets/vendor
           cp vendor/anime.esm.min.js android/app/src/main/assets/vendor/
           cp vendor/ANIMEJS-LICENSE.md android/app/src/main/assets/vendor/
@@ -62,6 +74,7 @@ jobs:
           html = path.read_text(encoding='utf-8')
           html = html.replace('href="/mistir-ui.css"', 'href="mistir-ui.css"')
           html = html.replace('src="/mistir-ui.js"', 'src="mistir-ui.js"')
+          html = html.replace('href="/mistir-ui.css"', 'href="mistir-ui.css"')
           html = html.replace('src="/mistir-motion.js"', 'src="mistir-motion.js"')
           html = html.replace('src="/mistir-download.js"', 'src="mistir-download.js"')
           html = html.replace("let u=new URL(location.href)", "let u=new URL('https://mistir-gift-demo-vedoy.vercel.app/')")

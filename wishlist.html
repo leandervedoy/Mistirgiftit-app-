@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="no" data-vd-theme="light" data-mistir-view="wishlist">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#faf8f5">
+  <meta name="description" content="Lag og del ønskelister for bursdag, jul og andre spesielle anledninger. Mistir Gift konseptdemo fra Vedoy Studio.">
+  <title>Mine ønskelister | Mistir Gift</title>
+  <link rel="stylesheet" href="./vd-base.css">
+  <link rel="stylesheet" href="./mistir-wishlist.css">
+</head>
+<body>
+<header class="wl-topbar">
+  <div class="wl-top-inner vd-container">
+    <a class="wl-brand" href="./index.html" aria-label="Mistir Gift – tilbake til butikken">Mistir <span>Gift.</span></a>
+    <nav class="wl-top-nav" aria-label="Hovednavigasjon">
+      <a href="./index.html" class="wl-nav-item">Butikk</a>
+      <a href="./wishlist.html" class="wl-nav-item is-active" aria-current="page">♡ Ønskelister</a>
+    </nav>
+  </div>
+</header>
+<main class="vd-container wl-main" id="wishlistMain">
+  <div class="wl-heading">
+    <div>
+      <span class="wl-kicker">MIN PERSONLIGE GAVESAMLING</span>
+      <h1>Ønskelister <span class="wl-heading-heart" aria-hidden="true">♡</span></h1>
+      <p class="wl-subtitle">Samle gavene du ønsker deg, opprett lister på sekunder og del dem med noen du er glad i.</p>
+    </div>
+    <span class="wl-swipe-tip" aria-hidden="true">← Sveip mot høyre for butikken</span>
+  </div>
+
+  <section class="wl-create" aria-labelledby="wl-create-title">
+    <div class="wl-create-copy">
+      <span class="wl-label">KOM I GANG</span>
+      <h2 id="wl-create-title">Lag en ny ønskeliste</h2>
+      <p>Velg et navn og legg til favorittene dine – du kan endre alt senere.</p>
+    </div>
+    <form id="createListForm" autocomplete="off">
+      <div class="wl-create-fields">
+        <label class="vd-visually-hidden" for="newListName">Navn på ønskelisten</label>
+        <input id="newListName" name="name" required maxlength="70" placeholder="F.eks. Bursdag, Jul eller Mine ønsker" autocomplete="off">
+        <button class="wl-primary-btn" type="submit">＋ Opprett liste</button>
+      </div>
+      <div class="wl-quick-names" aria-label="Forslag til listenavn">
+        <button type="button" data-template="Bursdagsønsker">🎂 Bursdag</button>
+        <button type="button" data-template="Juleønsker">🎄 Jul</button>
+        <button type="button" data-template="Mine favoritter">♡ Favoritter</button>
+        <button type="button" data-template="Gaver til noen">🎁 Gaver til noen</button>
+      </div>
+      <label class="wl-favorites-opt"><input id="includeFavorites" type="checkbox" checked> <span>Legg til mine lagrede favoritter i listen</span></label>
+    </form>
+  </section>
+
+  <section class="wl-summary" aria-label="Din gaveoversikt">
+    <div class="wl-stat"><span class="wl-stat-icon">📋</span><div><strong id="listStat">0</strong><span>Ønskelister</span></div></div>
+    <div class="wl-stat"><span class="wl-stat-icon">♥</span><div><strong id="favoriteStat">0</strong><span>Favoritter</span></div></div>
+    <div class="wl-stat wl-stat-wide"><span class="wl-stat-icon">✦</span><div><strong id="savedStat">0</strong><span>Unike gaver i listene</span></div></div>
+  </section>
+
+  <section class="wl-collection" aria-label="Dine lister og favoritter">
+    <div class="wl-tabs" role="tablist" aria-label="Ønskelistevisning">
+      <button class="wl-tab is-active" type="button" role="tab" id="tabLists" aria-controls="listsView" aria-selected="true" data-tab="lists">Mine lister <span id="tabListsCount">0</span></button>
+      <button class="wl-tab" type="button" role="tab" id="tabFavorites" aria-controls="favoritesView" aria-selected="false" data-tab="favorites">Favoritter <span id="tabFavoritesCount">0</span></button>
+    </div>
+
+    <div id="listsView" role="tabpanel" aria-labelledby="tabLists">
+      <div class="wl-section-lede"><h2>Dine ønskelister</h2><p>Trykk på en liste for å se og velge gavene.</p></div>
+      <div class="wl-lists-grid" id="listsGrid"></div>
+      <div class="wl-empty" id="emptyLists" hidden>
+        <div class="wl-empty-symbol">✦</div>
+        <h3>Din første liste begynner her</h3>
+        <p>Gi listen et navn over, eller velg Bursdag eller Jul for å komme raskt i gang.</p>
+        <button class="wl-primary-btn" id="emptyCreateButton" type="button">Lag min første liste</button>
+      </div>
+    </div>
+
+    <div id="favoritesView" role="tabpanel" aria-labelledby="tabFavorites" hidden>
+      <div class="wl-section-lede"><h2>Gavene du har lagret</h2><p>Trykk på hjertet i butikken for å samle favoritter her.</p></div>
+      <div class="wl-favorites-grid" id="favoritesGrid"></div>
+      <div class="wl-empty" id="emptyFavorites" hidden>
+        <div class="wl-empty-symbol">♡</div>
+        <h3>Her blir det fint å samle ønsker</h3>
+        <p>Du har ikke lagret noen favoritter ennå.</p>
+        <a class="wl-primary-btn" href="./index.html#catalog">Utforsk gavene</a>
+      </div>
+    </div>
+
+    <div id="detailView" aria-label="Rediger ønskeliste" hidden>
+      <button class="wl-back-link" type="button" id="detailBack">← Alle ønskelister</button>
+      <div class="wl-detail-header">
+        <div><span class="wl-label">DIN ØNSKELISTE</span><h2 id="detailTitle"></h2><p id="detailSubtitle"></p></div>
+        <div class="wl-detail-actions">
+          <button type="button" data-detail-action="share">↗ Del liste</button>
+          <button type="button" data-detail-action="rename">✎ Gi nytt navn</button>
+          <button type="button" data-detail-action="duplicate">⧉ Kopier</button>
+          <button class="wl-danger" type="button" data-detail-action="delete">Slett</button>
+        </div>
+      </div>
+      <form class="wl-rename-form" id="renameListForm" hidden>
+        <label for="renameListName">Nytt listenavn</label>
+        <div class="wl-rename-row"><input id="renameListName" maxlength="70" required><button type="submit" class="wl-primary-btn">Lagre</button><button type="button" id="cancelRename">Avbryt</button></div>
+      </form>
+      <div class="wl-picker-info"><strong>Velg gaver til listen</strong><span>Huk av eller fjern haken. Endringene lagres automatisk på denne enheten.</span></div>
+      <div id="detailProducts" class="wl-picker-grid"></div>
+    </div>
+  </section>
+
+  <p class="wl-local-note">🔒 Listene lagres på denne enheten i konseptdemoen. Deling bruker en lenke med produkt-ID-er, ikke en offentlig kundekonto.</p>
+</main>
+<nav class="wl-mobile-tabs" aria-label="Naviger mellom butikk og ønskelister">
+  <a href="./index.html" class="wl-mobile-link"><span aria-hidden="true">⌂</span>Butikk</a>
+  <a href="./wishlist.html" class="wl-mobile-link is-active" aria-current="page"><span aria-hidden="true">♡</span>Ønskelister</a>
+</nav>
+<div id="wishToast" class="wl-toast" role="status" aria-live="polite" aria-atomic="true"></div>
+<dialog id="favoritePicker" class="wl-dialog" aria-labelledby="favoritePickerTitle">
+  <form method="dialog"><button type="submit" class="wl-dialog-close" aria-label="Lukk">×</button></form>
+  <h2 id="favoritePickerTitle">Legg i ønskeliste</h2>
+  <p id="favoritePickerIntro">Velg ønskelisten du vil legge gaven i.</p>
+  <div id="favoritePickerChoices" class="wl-dialog-choices"></div>
+</dialog>
+<script src="./mistir-catalog.js"></script>
+<script src="./mistir-wishlist.js"></script>
+<script src="./mistir-swipe.js"></script>
+</body>
+</html>

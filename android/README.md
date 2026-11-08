@@ -40,3 +40,7 @@ APK-en og `MistirGift-VedoyStudio-demo.zip` publiseres samtidig. ZIP inneholder 
 Nettsiden har to knapper: **ZIP med APK** og **APK direkte**, begge via `/api/apk-download?format=zip|apk`. Knappene aktiveres bare for gyldige GitHub Release-filer. Endepunktet omdirigerer til GitHubs faktiske vedlegg (uten GitHub-side); store binarfiler proxieres ikke gjennom Vercel Function.
 
 Anime.js v4.5.0 er lagret lokalt i `vendor/` under MIT-lisens, og brukes av `mistir-motion.js` for behagelige overganger i nettsiden og offline i Android-demoen. Systeminnstillingen for redusert bevegelse respekteres. Kun demo, ikke kommersiell produksjonsapp.
+
+## Dedikert ønskelisteside
+
+`wishlist.html` er en egen skjerm med swipe fra butikken, egen administrasjon av lister, deling, valg av produkter og de eksisterende lokale datanoklene. `vd-base.css` er en lokal kopi av Vedoy CSS grunnstiler fra `css.vedoystudio.no`, slik at appen fungerer uten nett. APK/ZIP-knapper er fjernet fra butikkforsiden, mens byggeflyten beholdes for intern distribusjon.

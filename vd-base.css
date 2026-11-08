@@ -1,0 +1,29 @@
+/* Local copy of Vedoy CSS base from https://css.vedoystudio.no/vedoy.css (source: Vedoy CSS Vercel deployment). */
+:root {
+  --vd-bg: #080b12;
+  --vd-surface: #0f1420;
+  --vd-surface-raised: #151b29;
+  --vd-border: #252d3d;
+  --vd-text: #f6f8fb;
+  --vd-muted: #929daf;
+  --vd-brand: #6dff9c;
+  --vd-brand-ink: #06130b;
+  --vd-accent: #8aa8ff;
+  --vd-danger: #ff6f79;
+  --vd-radius: 12px;
+  --vd-shadow: 0 24px 80px rgb(0 0 0 / .28);
+  --vd-font: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --vd-mono: "SFMono-Regular", Consolas, monospace;
+}
+
+[data-vd-theme="light"] { --vd-bg:#f3f5f8; --vd-surface:#fff; --vd-surface-raised:#f7f9fb; --vd-border:#dce2ea; --vd-text:#0e1522; --vd-muted:#627086; --vd-brand:#146c38; --vd-brand-ink:#fff; --vd-accent:#315acb; --vd-danger:#bf3140; }
+*, *::before, *::after { box-sizing: border-box; }
+html { color-scheme: dark; font-family: var(--vd-font); background: var(--vd-bg); color: var(--vd-text); }
+[data-vd-theme="light"] { color-scheme: light; }
+body { margin: 0; min-height: 100vh; background: var(--vd-bg); color: var(--vd-text); }
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+.vd-visually-hidden { position:absolute!important; width:1px!important; height:1px!important; padding:0!important; margin:-1px!important; overflow:hidden!important; clip:rect(0,0,0,0)!important; white-space:nowrap!important; border:0!important; }
+.vd-container { width:min(100% - 2rem, 1180px); margin-inline:auto; }
+.vd-stack { display:grid; gap:1rem; }
+.vd-cluster { display:flex; flex-wrap:wrap; align-items:center; gap:.75rem; }¶»§q«^

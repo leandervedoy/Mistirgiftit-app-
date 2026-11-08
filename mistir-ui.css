@@ -93,3 +93,7 @@
 .hero .app-download-cta:hover,.hero .app-download-cta:focus-visible{background:#914631;color:#fff}
 .app-download-note{margin:11px 0 0!important;max-width:570px!important;font-size:13px!important;line-height:1.55;color:#6f594c!important}
 @media(max-width:460px){.hero .app-download-cta{width:100%}.hero-actions{align-items:stretch}}
+
+/* Safe same-origin APK download: never send visitors to a GitHub page. */
+.app-download-cta:disabled,.hero .app-download-cta:disabled{opacity:.6;cursor:not-allowed;box-shadow:none;background:#98897d;border-color:#98897d;transform:none}
+.app-download-cta:not(:disabled){cursor:pointer}

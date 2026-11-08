@@ -77,7 +77,6 @@ jobs:
 
       - name: Publish direct-download GitHub prerelease
         if: github.ref == 'refs/heads/main'
-        continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
